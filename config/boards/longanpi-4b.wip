@@ -1,0 +1,16 @@
+# LonganPi 4B
+BOARD_NAME="Longan Pi"
+BOARDFAMILY="sun55iw3"
+BOARD_MAINTAINER=""
+KERNEL_TARGET="legacy"
+BOOT_FDT_FILE="allwinner/sun55i-t527-demo.dtb"
+SRC_EXTLINUX="yes"
+SRC_CMDLINE="console=ttyS0,115200 earlyprintk=sunxi-uart,0x02500000 rootwait"
+BOOTFS_TYPE="fat"
+BOOTSIZE="256"
+
+function post_family_tweaks__longanpi-4b() {
+    display_alert "Applying boot blobs"
+	cp -v "$SRC/packages/blobs/syterkit/bl31.bin" "$SDCARD/boot/bl31.bin"
+	cp -v "$SRC/packages/blobs/syterkit/scp.bin" "$SDCARD/boot/scp.bin"
+}
